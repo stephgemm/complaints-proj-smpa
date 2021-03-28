@@ -1,0 +1,44 @@
+---
+title: "complaints-project"
+author: "steph gemmell"
+date: "3/28/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(glue)
+library(plotly)
+library(DT)
+library(htmlwidgets)
+library(htmltools)
+library(readr)
+
+```
+
+import data and analyze
+
+```{r}
+
+saveRDS(complaints, "complaints.rds")
+
+complaints
+View(complaints)
+
+complaints %>% 
+  count(timely_response == "No")
+
+(3806/393050)*100
+#slightly less than 1 percent of complaints did not receive a timely response
+
+not_timely <- complaints %>% 
+  filter(timely_response == "No")
+
+not_timely %>%
+ count(product) 
+  
+
+```
