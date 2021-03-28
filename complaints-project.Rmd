@@ -21,7 +21,6 @@ library(readr)
 
 import data and analyze
 
-
 ```{r}
 
 saveRDS(complaints, "complaints.rds")
@@ -49,7 +48,7 @@ not_timely <- complaints %>%
   filter(timely_response == "No")
 
 not_timely_freq <- complaints %>% 
-  count(product)
+  count(product) %>% arrange(desc(n))
 
 not_timely_freq
 glimpse(not_timely_freq)
@@ -57,7 +56,7 @@ glimpse(not_timely_freq)
 
 ```
 
-the top five products involved when consumers did not receive a timely response were:
+~~~~~the top five products involved when consumers did not receive a timely response were:~~~~~
 
 Credit reporting, credit repair services, or other personal consumer reports
 255748
@@ -75,32 +74,79 @@ Checking or savings account
 20679
 
 
-what results did the consumers get on these complaints?
+~~~~~what results did the consumers get on these complaints?~~~~~
 
 ```{r}
 
-not_timely %>% 
-  count(company_response_to_consumer)
+untimely_response <- not_timely %>% 
+  count(company_response_to_consumer) %>%  arrange(desc(n))
+
+untimely_response
 
 ```
 
 most frequently, the complaints were "closed with explanation"
 
+~~~~~what companies were involved most often?~~~~~
+
 
 ```{r}
 
+complaint_cos <- not_timely %>% 
+  count(company) %>% arrange(desc(n))
 
+complaint_cos
 
 
 ```
 
+~~~~~the top 10 companies involved with complaints that lacked a timely response were:~~~~~
 
+Xerox State & Local Solutions, Inc.	
+413			
 
+Army and Air Force Exchange Service	
+85		
 
+Lending Club Corp	
+84			
 
+Atlanticus Services Corporation	
+68		
 
+MoneyLion Inc.	
+64			
 
+Carter-Young, Inc.	
+61			
 
+WAKEFIELD & ASSOCIATES, INC.	
+56		
 
+WELLS FARGO & COMPANY	
+54			
 
+AmerAssist A/R Solutions, Inc.	
+52		
 
+Capital Accounts, LLC	
+51	
+
+```{r}
+#all datasets for flexdashboard
+
+saveRDS(complaints, "complaints.rds")
+
+not_timely <- complaints %>% 
+  filter(timely_response == "No")
+
+not_timely_freq <- complaints %>% 
+  count(product)
+
+complaint_cos <- not_timely %>% 
+  count(company) %>% arrange(desc(n))
+
+untimely_response <- not_timely %>% 
+  count(company_response_to_consumer) %>%  arrange(desc(n))
+
+```
