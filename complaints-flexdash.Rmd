@@ -1,5 +1,5 @@
 ---
-title: "Consumer Complaints"
+title: "Consumer Complaints: Untimely Responses"
 output: 
   flexdashboard::flex_dashboard:
     vertical_layout: scroll
@@ -21,7 +21,7 @@ library(htmltools)
 
 ```
 
-Product Categories with Untimely Responses
+Product Categories
 =====================================
 Out of more than 390,000 consumer complaints, just under 1 percent did not receive a timely response.
 Among the complaints that did not receive a timely response, the top five product categories involved were:
@@ -43,6 +43,8 @@ fig <- fig %>% layout(
                   yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 fig
 
+
+
 ```
 
 Company Responses
@@ -62,11 +64,13 @@ fig <- fig %>% layout(title = "Company Responses to Consumers",
          yaxis = list (title = "Number of Occurrences"))
 fig
 
+
+
 ```
 
-Top Companies with Untimely Responses
+Companies
 =====================================
-The 10 companies that failed to provide timely responses to consumer complaints most often are displayed below:
+The 10 companies that failed to provide timely responses to consumer complaints most often included:
 
 ```{r}
 
@@ -80,6 +84,8 @@ fig <- fig %>% layout(title = "Companies Providing Most Untimely Responses",
          xaxis = list(title = "Companies"),
          yaxis = list (title = "Number of Unitmely Responses"))
 fig
+
+
 
 ```
 
