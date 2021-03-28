@@ -20,29 +20,16 @@ library(htmltools)
 library(readxl)
 
 
-#import formatted version in Excel
-salaries <- read_xlsx("whsalaries_2017_thru_2019.xlsx")
+saveRDS(complaints, "complaints.rds")
 
-salaries <- salaries %>% 
-  clean_names()  
+not_timely <- complaints %>% 
+  filter(timely_response == "No")
 
-glimpse(salaries)
+not_timely_freq <- complaints %>% 
+  count(product)
 
 
 
-#### looking for those who are in both years' of data ####
-
-yr2018 <- salaries %>% 
-  filter(year == "2018")
-
-yr2019 <- salaries %>% 
-  filter(year == "2019")
-
-joined <- inner_join(yr2018, yr2019, by = c("name" = "name"))
-
-names(joined)
-
-#select relevant columns and rename
 joined2 <- joined %>% 
   select(
     name,

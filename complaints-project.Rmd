@@ -82,7 +82,6 @@ what results did the consumers get on these complaints?
 not_timely %>% 
   count(company_response_to_consumer)
 
-
 ```
 
 most frequently, the complaints were "closed with explanation"
