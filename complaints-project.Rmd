@@ -21,6 +21,7 @@ library(readr)
 
 import data and analyze
 
+
 ```{r}
 
 saveRDS(complaints, "complaints.rds")
@@ -28,17 +29,79 @@ saveRDS(complaints, "complaints.rds")
 complaints
 View(complaints)
 
+```
+
+column lists whether consumers received a timely response or not - how often is the response not timely?
+
++ which "products" most frequently fall into this category?
+
+```{r}
+
 complaints %>% 
   count(timely_response == "No")
 
 (3806/393050)*100
+
 #slightly less than 1 percent of complaints did not receive a timely response
+#when people did not get a timely response the products most frequently involved were:
 
 not_timely <- complaints %>% 
   filter(timely_response == "No")
 
-not_timely %>%
- count(product) 
-  
+not_timely_freq <- complaints %>% 
+  count(product)
+
+not_timely_freq
+glimpse(not_timely_freq)
+
 
 ```
+
+the top five products involved when consumers did not receive a timely response were:
+
+Credit reporting, credit repair services, or other personal consumer reports
+255748
+
+Debt collection
+46088
+
+Credit card or prepaid card
+29128
+
+Mortgage
+20940
+
+Checking or savings account
+20679
+
+
+what results did the consumers get on these complaints?
+
+```{r}
+
+not_timely %>% 
+  count(company_response_to_consumer)
+
+
+```
+
+most frequently, the complaints were "closed with explanation"
+
+
+```{r}
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
